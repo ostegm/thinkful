@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AnalogSea</title>
+  <meta http-equiv="Content-Language" content="en">
+  <meta charset="utf-8" name="description" content="Signup page for AnalogSea">
+  <!-- fonts  -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <!-- reset -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css">
+  <!-- styles -->
+  <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+  <main role="main">
+    
+    <section class="logo-box">
+      <img class="logo" src="https://tf-assets-prod.s3.amazonaws.com/tf-curric/WEB-DEV-001/2.5.2_challenge_signup_form/logo.png" alt="The AnalogSea logo.">
+    </section>
+
+    <section class="signup-container">
+      <div class="signup-header">Sign up</div>
+      <form role="form" action="/signup" method="post">
+        <label for="email">Email</label>
+        <input id="email" type="email" name="email" placeholder="me@example.com" required>
+        <label for="password">Password</label>
+        <input id="password" type="text" name="password" placeholder="1234pAssW0rd" required>
+        <button type="submit">Sign up</button>
+      </form>
+    </section>
+
+    <section class="already-signed-up">
+      <span>Already have an account?</span>
+      <a href="/login">Log In</a>
+    </section>
+
+  </main>
+</body>
+</html>

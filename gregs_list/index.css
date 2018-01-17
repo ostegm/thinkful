@@ -1,0 +1,139 @@
+body * {
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+a {
+	text-decoration: none;
+}
+
+nav {
+	position: fixed;
+	padding-left: 10px;
+	padding-right: 60px;
+	background-color: #EEEEEE;
+	height: 40px;
+	width: 100%;
+	text-align: left;
+	left: 0;
+	top: 0;
+}
+
+main {
+	padding-top: 100px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 90%;
+}
+
+/* Nav bar and links */
+
+.home-link {
+	position: fixed;
+	top: 10px;
+}
+
+.home-link:hover {
+	font-size: 200%;
+}
+
+.home-link a {
+	color: black;
+}
+
+.account-links {
+	position: fixed;
+	top: 10px;
+	right: -10px;
+	text-align: right;
+	padding-right: 60px;
+
+}
+
+.account-links a {
+	color: blue;
+	margin: 10px;
+}
+
+
+/* Search box and container */
+
+.search-container {
+	height: 50px;
+}
+
+.search-button, .search-box {
+	height: 30px;
+	border: 1px solid grey;
+	border-radius: 3%;
+	margin-left: 5px;
+}
+
+.search-button{
+	display: inline-block;
+	position: relative;
+	left 3px;
+	top: 10px;
+}
+
+.search-box {
+	width: 400px;
+}
+
+
+/* Results Navigation Buttons*/
+
+.results-nav {
+	width: 350px;
+	height: 40px;
+	font-size: 0;
+	margin-top: 20px;
+}
+
+.back-button, .page-list, .next-button {
+	display: inline-block;
+	border: 1px solid #DDDDDD;
+	border-radius: 3%;
+	text-align: center;
+	height: 30px;
+}
+
+.back-button, .next-button {
+	width: 25%;
+}
+
+.page-list {
+	width: 50%;
+}
+
+
+.results-nav a, .results-nav p {
+	font-size: 18px;
+	color: black;
+	display: inline-block;
+	margin: 0;	
+	padding-top: 2px;
+}
+
+/* Results display section */
+
+.results-container {
+	height: 400px;
+}
+
+.result-row {
+	height: 20px;
+	width: 600px;
+	margin-top: 10px;
+}
+
+.result-row a,p {
+	display: inline-block;
+	font-size: 18px;
+	color: grey;
+	margin: 5px;
+}
+
+.result-row a {
+	color: blue;
+}

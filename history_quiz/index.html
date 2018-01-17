@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>History Quiz</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" href="float-grid.css" />
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+  <header role="header">
+    <div class="header-bar">
+      <h1>History Quiz</h1>
+    </div>
+  </header>
+  <main role="main">
+    <div class="row quiz-container">
+      
+      <div class="starting-container">
+        <button class='js-start-quiz' type="button">Start Quiz</button>
+      </div>
+
+      <div class="col-1 question-container hidden">
+        <h2 class="question">According to Greek mythology, who was the god of wine?</h2>
+        <form>
+          <input type="radio" name="baccus" value="question-option1" correct=false>baccus<br>
+          <input type="radio" name="adonis" value="question-option2" correct=false>adonis<br> 
+          <input type="radio" name="venus" value="question-option2" correct=false>venus<br> 
+          <input type="radio" name="dionysus" value="question-option2" correct=true>dionysus<br> 
+        </form>
+      </div>
+      <div class="row quiz-nav hidden">
+        <div class="col-3 quiz-nav-item">
+          <div>Question 1 of 10</div>
+        </div>
+        <div class="col-3 quiz-nav-item">
+          <div>Correct 0/0</div>
+        </div>
+        <div class="col-3 quiz-nav-item">
+          <div>
+            <button class="js-next-question hidden" type="button">Next Question</button>
+            <button class="js-submit-answer" type="button">Submit Answer</button>
+          </div>
+        </div>
+        <div class="col-3 quiz-nav-item">
+          <div><button class="js-reset-quiz" type="button">Start Over</button></div>
+        </div>
+    </div>
+    </div>
+  </main>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+</body>
+</html>
