@@ -14,40 +14,14 @@
     </div>
   </header>
   <main role="main">
-    <div class="row quiz-container">
-      
-      <div class="starting-container">
-        <button class="js-start-quiz" type="button">Start Quiz</button>
-      </div>
-      <div class="col-1 question-container hidden">
-        <h2 class="question">According to Greek mythology, who was the god of wine?</h2>
-        <form>
-          <input type="radio" name="q1" id="option-1" value="baccus" correct="false"><label for="option-1">baccus</label><br>
-          <input type="radio" name="q1" id="option-2" value="adonis" correct="false"><label for="option-1">adonis</label><br>
-          <input type="radio" name="q1" id="option-3" value="venus" correct="false"><label for="option-1">venus</label><br>
-          <input type="radio" name="q1" id="option-4" value="dionysus" correct="true"><label for="option-1">dionysus</label><br>
-        </form>
-      </div>
-      <div class="row quiz-nav hidden">
-        <div class="col-3 quiz-nav-item">
-          <div>Question 1 of 10</div>
-        </div>
-        <div class="col-3 quiz-nav-item">
-          <div>Correct 0/0</div>
-        </div>
-        <div class="col-3 quiz-nav-item">
-          <div>
-            <button class="js-next-question hidden" type="button">Next Question</button>
-            <button class="js-submit-answer" type="button">Submit Answer</button>
-          </div>
-        </div>
-        <div class="col-3 quiz-nav-item">
-          <div><button class="js-reset-quiz" type="button">Start Over</button></div>
-        </div>
-    </div>
+    <div class="row quiz-container"> 
+      <div class="col-12 question-container"><button class="js-start-quiz" type="button">Start Quiz</button></div>
+      <div class="col-12 quiz-nav hidden"></div>
     </div>
   </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="questions.js"></script>
     <script type="text/javascript" src="index.js"></script>
 </body>
 </html>

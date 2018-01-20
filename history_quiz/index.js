@@ -1,52 +1,159 @@
 'use strict'
 
-function toggleStartPage() {
-  //Shows a page asking user if they're ready to begin.
-  $('.starting-container').toggleClass('hidden');
-  $('.question-container').toggleClass('hidden');
+const STORE = {
+  currentQuestion: 0,
+  state: 'start',
+  correct: 0,
+};
+
+function checkAnswer() {
+  const selected = $('input[name=q1]:checked').val();
+  const correct = QUESTIONS[STORE.currentQuestion].correctAnswer;
+  const result = (selected === correct);
+  STORE.correct += result;
+  return result;
+}
+
+function showCorrect(selectedCorrectly) {
+  if (selectedCorrectly === true) {
+    $('input[name=q1]').parent().css('background-color', 'grey');
+    $('input[name=q1]:checked').parent().css('background-color', 'green');
+
+  } else {
+    $('input[name=q1]').parent().css('background-color', 'grey');
+    $('input[name=q1]:checked').parent().css('background-color', 'red');
+    $('input[name=q1][correct=true]').parent().css('background-color', 'green');
+  }
+}
+
+function generateQuestionTemplate(question) {
+  const shuffledAnswers =  _.shuffle(question.answers);
+  const correctList = shuffledAnswers.map(a => a === question.correctAnswer);
+  return `
+        <h2 class="question">${question.text}</h2>
+        <form>
+          <label for="option-1">
+          <input type="radio" name="q1" id="option-1" value="${shuffledAnswers[0]}" correct="${correctList[0]}">
+          <span>${shuffledAnswers[0]}</span></label>
+          <label for="option-2">
+          <input type="radio" name="q1" id="option-2" value="${shuffledAnswers[1]}" correct="${correctList[1]}">
+          <span>${shuffledAnswers[1]}</span></label>
+          <label for="option-3">
+          <input type="radio" name="q1" id="option-3" value="${shuffledAnswers[2]}" correct="${correctList[2]}">
+          <span>${shuffledAnswers[2]}</span></label>
+          <label for="option-4">
+          <input type="radio" name="q1" id="option-4" value="${shuffledAnswers[3]}" correct="${correctList[3]}">
+          <span>${shuffledAnswers[3]}</span></label>
+        </form>
+      </div>
+  `;
+}
+
+function getNavButton() {
+  if (STORE.state === 'submitted') {
+    return '<button class="js-next-question" type="button">Next Question</button>';
+  } else if (STORE.state === 'question') {
+    return '<button class="js-submit-answer" type="button">Submit Answer</button>';
+  } else if (STORE.state === 'results') {
+    return '<button class="js-view-results" type="button">View Results</button>';
+  } else {
+    return null;
+  }
+
+}
+
+function generateQuizNavTemplate() {
+  const qText = `${STORE.currentQuestion + 1} / ${QUESTIONS.length}`;
+  const correctText = `Score: ${STORE.correct}`;
+  let navHtml = `
+        <div class="col-3 quiz-nav-item"><div>Question ${qText}</div></div>
+        <div class="col-3 quiz-nav-item"><div>${correctText}</div></div>
+        <div class="col-3 quiz-nav-item">
+          ${getNavButton()}
+        </div>
+        <div class="col-3 quiz-nav-item">
+          <div><button class="js-reset-quiz" type="button">Start Over</button></div>
+        </div>
+    </div>
+  `;
+  return navHtml;
+}
+
+function generateResultsTemplate() {
+  return `<p>Thanks for playing, you got ${STORE.correct} questions right.</p>`;
+}
+
+function renderFinalResults() {
+  STORE.state = 'results';
+  const resultsHtml = generateResultsTemplate();
   $('.quiz-nav').toggleClass('hidden');
+  $('.question-container').html(resultsHtml);
+}
+
+function renderQuestion() {
+  STORE.state = 'question';
+  const question = QUESTIONS[STORE.currentQuestion];
+  const questionHtml = generateQuestionTemplate(question);
+  const navHtml = generateQuizNavTemplate();
+  $('.question-container').html(questionHtml);
+  $('.quiz-nav').html(navHtml);
 }
 
 function handleStartButtonClicked() {
   // Once the user begins the quiz, renders the question section.
-  $('.js-start-quiz').click(event => toggleStartPage());
+  $('.js-start-quiz').click(event => {
+    $('.quiz-nav').toggleClass('hidden');
+    renderQuestion();
+  });
 }
 
 function handleResetButtonClicked() {
-  // Resets the quiz and returns to the start screen.
-  // TODO: Reset quiz state to beginning.
-  $('.js-reset-quiz').click(event => toggleStartPage());
+  $('.quiz-nav').on('click', '.js-reset-quiz', event => {
+    location.reload();
+  });
 }
 
 function handleQuestionSubmit() {
-  // Checks submitted answer against correct answer and notifies user.
-  // Updates correct count & question count.
-  // Also changes submit button to "next question" button
-  $('.js-submit-answer').click(event => {
-    // Need to check for whether an answer is selected...
-    console.log('Question submitted');
-    $('.js-submit-answer').toggleClass('hidden');
-    $('.js-next-question').toggleClass('hidden');
-    alert('You submitted a question and got it.... (right/wrong)');
+  $('.quiz-nav').on('click', '.js-submit-answer', event => {
+    if ($('input').is(':checked') === false) {
+      alert('Please select an answer.');
+      return;
+    } else if (STORE.currentQuestion + 1 < QUESTIONS.length) {
+      STORE.state = 'submitted';
+    } else {
+      STORE.state = 'results';
+    }
+    const selectedCorrectly = checkAnswer();
+    const nav = generateQuizNavTemplate();
+    $('.quiz-nav').html(nav);
+    showCorrect(selectedCorrectly);
   });
 }
 
 function handleNextQuestionClicked() {
-  // Gets next question from array, and renders next quiz quesion.
-  // Changes "next question" button to submit button.
-  $('.js-next-question').click(event => {
-    // Need to check for whether an answer is selected.
-    console.log('Moving to next question.');
-    $('.js-submit-answer').toggleClass('hidden');
-    $('.js-next-question').toggleClass('hidden');
+  $('.quiz-nav').on('click', '.js-next-question',  event => {
+      STORE.currentQuestion++;
+      renderQuestion();
+    });
+}
+
+function handleViewResultsClicked() {
+  $('.quiz-nav').on('click', '.js-view-results', renderFinalResults);
+}
+
+function handleAnswerSelected() {
+  $('.quiz-container').on('click', 'label', event=> {
+    $('input[name=q1]:checked').parent().css('background-color', '#AF6438');
   });
 }
 
 function renderQuiz() {
   handleStartButtonClicked();
+  handleAnswerSelected();
   handleResetButtonClicked();
   handleQuestionSubmit();
   handleNextQuestionClicked();
+  handleViewResultsClicked();
 }
 
 $(renderQuiz);
