@@ -75,8 +75,8 @@ function generateHeaderResultsTemplate() {
   const qText = `${STORE.currentQuestion + 1} / ${QUESTIONS.length}`;
   const correctText = `Score: ${STORE.correct}`;
   let resultsHtml = `
-      <h1>History Quiz</h1>
-      <ul class="quiz-results">
+      <h1 class="col-3">History Quiz</h1>
+      <ul>
         <li>Question ${qText}</li>
         <li>${correctText}</li>
       </ul>
@@ -86,12 +86,7 @@ function generateHeaderResultsTemplate() {
 
 
 function generateQuizNavTemplate() {
-  const qText = `${STORE.currentQuestion + 1} / ${QUESTIONS.length}`;
-  const correctText = `Score: ${STORE.correct}`;
-  let navHtml = `
-        <div class="col-12 quiz-nav-item">${getNavButton()}</div>
-    </div>
-  `;
+  let navHtml = `<div class="col-12 quiz-nav-item">${getNavButton()}</div>`;
   return navHtml;
 }
 

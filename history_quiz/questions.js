@@ -1,8 +1,8 @@
 const QUESTIONS = [
   {
     text: 'According to Greek mythology, who was the god of wine?',
-    answers: ['Dionysos','Baccus','Adonis','Venus',],
-    correctAnswer: 'Dionysos',
+    answers: ['Dionysus','Baccus','Adonis','Venus',],
+    correctAnswer: 'Dionysus',
   },
   {
     text: 'Ruling for 64 years, which Queen was the longest-reigning British monarch before Queen Elizabeth II?',
