@@ -9,13 +9,26 @@ const QUESTIONS = [
     answers: ['Queen Victoria','Queen Elizabeth I','Quen Anne','Queen Eleanor'],
     correctAnswer: 'Queen Victoria',
   },
+  {
+    text: 'Before the introduction of the euro, what was the name for the basic monetary unit used in the Netherlands?',
+    answers: ['Guilder','Ducat','Monero','Dinero',],
+    correctAnswer: 'Guilder',
+  },
+  {
+    text: 'Which U.S. president made the first presidential radio broadcast?',
+    answers: ['Calvin Coolidge','Teddy Roosevelt','William Mckinley','Franklin Roosevelt',],
+    correctAnswer: 'Calvin Coolidge',
+  },
+  {
+    text: 'Jimmy Carter was the first U.S. president born in a what?',
+    answers: ['Hospital','Barn','Automobile','Drought',],
+    correctAnswer: 'Hospital',
+  }
   ];
 
 
-// ['Guilder','Ducat','Monero','Dinero',]
-// ['Calvin Coolidge','Teddy Roosevelt','William Mckinley','Franklin Roosevelt',]
+
 // ['Tax Evasion','Murder','Grand Theft Auto','Bank Robbery',]
 // ['The Renaissance','The Guilded Age','The Victorian Era','The bronze age',]
 // ['Constantinople','Jerusalem','Athens','Mosul',]
-// ['Hostpital','Barn','Automobile','Drought',]
 // ['Russia','China','Canada','Spain',]

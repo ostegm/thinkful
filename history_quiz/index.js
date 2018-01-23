@@ -1,5 +1,14 @@
 'use strict'
 
+// Todo:
+// 1. Move submit button to right corner of nav bar.
+// 2. Remove restart
+// 3. Fix spacing on result section.
+
+const incorrectColor = '#EA4335';
+const correctColor = '#34A853';
+const notSelectedColor = '#9AA0A6';
+
 const STORE = {
   currentQuestion: 0,
   state: 'start',
@@ -16,13 +25,13 @@ function checkAnswer() {
 
 function showCorrect(selectedCorrectly) {
   if (selectedCorrectly === true) {
-    $('input[name=q1]').parent().css('background-color', 'grey');
-    $('input[name=q1]:checked').parent().css('background-color', 'green');
+    $('input[name=q1]').parent().css('background-color', notSelectedColor);
+    $('input[name=q1]:checked').parent().css('background-color', correctColor);
 
   } else {
-    $('input[name=q1]').parent().css('background-color', 'grey');
-    $('input[name=q1]:checked').parent().css('background-color', 'red');
-    $('input[name=q1][correct=true]').parent().css('background-color', 'green');
+    $('input[name=q1]').parent().css('background-color', notSelectedColor);
+    $('input[name=q1]:checked').parent().css('background-color', incorrectColor);
+    $('input[name=q1][correct=true]').parent().css('background-color', correctColor);
   }
 }
 
@@ -66,8 +75,8 @@ function generateQuizNavTemplate() {
   const qText = `${STORE.currentQuestion + 1} / ${QUESTIONS.length}`;
   const correctText = `Score: ${STORE.correct}`;
   let navHtml = `
-        <div class="col-3 quiz-nav-item"><div>Question ${qText}</div></div>
-        <div class="col-3 quiz-nav-item"><div>${correctText}</div></div>
+        <div class="col-3 quiz-nav-item"><span>Question ${qText}</span></div>
+        <div class="col-3 quiz-nav-item"><span>${correctText}</span></div>
         <div class="col-3 quiz-nav-item">
           ${getNavButton()}
         </div>
@@ -103,6 +112,8 @@ function handleStartButtonClicked() {
   // Once the user begins the quiz, renders the question section.
   $('.js-start-quiz').click(event => {
     $('.quiz-nav').toggleClass('hidden');
+    $('.starting-container').toggleClass('hidden');
+    $('.question-container').toggleClass('hidden');
     renderQuestion();
   });
 }
@@ -141,15 +152,8 @@ function handleViewResultsClicked() {
   $('.quiz-nav').on('click', '.js-view-results', renderFinalResults);
 }
 
-function handleAnswerSelected() {
-  $('.quiz-container').on('click', 'label', event=> {
-    $('input[name=q1]:checked').parent().css('background-color', '#AF6438');
-  });
-}
-
 function renderQuiz() {
   handleStartButtonClicked();
-  handleAnswerSelected();
   handleResetButtonClicked();
   handleQuestionSubmit();
   handleNextQuestionClicked();
