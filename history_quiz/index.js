@@ -60,7 +60,7 @@ function getNavButton() {
   } else if (STORE.state === 'question') {
     return '<button class="js-submit-answer" type="button">Submit Answer</button>';
   } else if (STORE.state === 'results') {
-    return '<button class="js-view-results" type="button">View Results</button>';
+    return '<button class="js-reset-quiz" type="button">Try Again</button>';
   } else {
     return null;
   }
@@ -87,7 +87,13 @@ function generateQuizNavTemplate() {
 }
 
 function generateResultsTemplate() {
-  return `<p>Thanks for playing, you got ${STORE.correct} questions right.</p>`;
+  return `
+  <div class="modal-content">
+    <span>Thanks for playing, you got ${STORE.correct} questions right.<br><br>
+    <a href=""">Try again?</a></span>
+    <span class="js-close-modal">&times;</span>
+  </div>
+  `;
 }
 
 function renderFinalResults() {
@@ -124,6 +130,20 @@ function handleResetButtonClicked() {
   });
 }
 
+function showResultsModal() {
+  const resultsHtml = generateResultsTemplate();
+  const modal = $('.js-results-modal')
+  modal.html(resultsHtml)
+  modal.toggleClass('hidden');
+  handleModalInteractions();
+};
+
+function handleModalInteractions() {
+  $('.js-results-modal').on('click', '.js-close-modal', event => {
+      $('.js-results-modal').toggleClass('hidden')
+  })
+}
+
 function handleQuestionSubmit() {
   $('.quiz-nav').on('click', '.js-submit-answer', event => {
     if ($('input').is(':checked') === false) {
@@ -133,6 +153,7 @@ function handleQuestionSubmit() {
       STORE.state = 'submitted';
     } else {
       STORE.state = 'results';
+      showResultsModal();
     }
     const selectedCorrectly = checkAnswer();
     const resultsHtml = generateHeaderResultsTemplate();
@@ -156,10 +177,11 @@ function handleViewResultsClicked() {
 
 function renderQuiz() {
   handleStartButtonClicked();
-  handleResetButtonClicked();
   handleQuestionSubmit();
   handleNextQuestionClicked();
   handleViewResultsClicked();
+  handleResetButtonClicked();
+
 }
 
 $(renderQuiz);

@@ -200,6 +200,51 @@ label:hover, label:focus {
 }
 
 
+/* ----------------- Results Modal ----------------- */
+
+.js-results-modal {
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 200px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+    background: linear-gradient(#232526, #414345);
+    background: linear-gradient(to top, rgba(35,37,38,.9), rgba(65,67,69,1));
+    margin: auto;
+    padding: 20px;
+    width: 40%;
+    font-size: 26px;
+}
+
+.modal-content a {
+  color: grey;
+  text-decoration: none;
+}
+
+.js-close-modal {
+    display: inline-block;
+    color: #aaaaaa;
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: right;
+}
+
+.js-close-modal:hover,
+.js-close-modal:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 /* ----------------- Non-mobile, grid  ----------------- */
 @media only screen and (min-width: 640px) {
   /* 3 columns, 3/12 in % */
