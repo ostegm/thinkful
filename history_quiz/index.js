@@ -71,18 +71,25 @@ function getNavButton() {
 
 }
 
+function generateHeaderResultsTemplate() {
+  const qText = `${STORE.currentQuestion + 1} / ${QUESTIONS.length}`;
+  const correctText = `Score: ${STORE.correct}`;
+  let resultsHtml = `
+      <h1>History Quiz</h1>
+      <ul class="quiz-results">
+        <li>Question ${qText}</li>
+        <li>${correctText}</li>
+      </ul>
+  `;
+  return resultsHtml;
+}
+
+
 function generateQuizNavTemplate() {
   const qText = `${STORE.currentQuestion + 1} / ${QUESTIONS.length}`;
   const correctText = `Score: ${STORE.correct}`;
   let navHtml = `
-        <div class="col-3 quiz-nav-item"><span>Question ${qText}</span></div>
-        <div class="col-3 quiz-nav-item"><span>${correctText}</span></div>
-        <div class="col-3 quiz-nav-item">
-          ${getNavButton()}
-        </div>
-        <div class="col-3 quiz-nav-item">
-          <div><button class="js-reset-quiz" type="button">Start Over</button></div>
-        </div>
+        <div class="col-12 quiz-nav-item">${getNavButton()}</div>
     </div>
   `;
   return navHtml;
@@ -104,8 +111,10 @@ function renderQuestion() {
   const question = QUESTIONS[STORE.currentQuestion];
   const questionHtml = generateQuestionTemplate(question);
   const navHtml = generateQuizNavTemplate();
+  const resultsHtml = generateHeaderResultsTemplate();
   $('.question-container').html(questionHtml);
   $('.quiz-nav').html(navHtml);
+  $('.header-bar').html(resultsHtml);
 }
 
 function handleStartButtonClicked() {
@@ -135,8 +144,10 @@ function handleQuestionSubmit() {
       STORE.state = 'results';
     }
     const selectedCorrectly = checkAnswer();
+    const resultsHtml = generateHeaderResultsTemplate();
     const nav = generateQuizNavTemplate();
     $('.quiz-nav').html(nav);
+    $('.header-bar').html(resultsHtml);
     showCorrect(selectedCorrectly);
   });
 }

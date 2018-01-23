@@ -6,6 +6,20 @@ html {
   background-size: cover;
 }
 
+li {
+ list-style-type: none;
+ display: inline-block;
+ margin-left: 25px;
+}
+
+.quiz-results {
+  position: fixed;
+  top: 6px;
+  right: -10px;
+  text-align: right;
+  padding-right: 60px;
+  font-size: 18px;
+}
 
 body {
   box-sizing: border-box;
@@ -24,6 +38,10 @@ body {
 	top: 0;
 	width: 100%;
   font-size: 12px;
+}
+
+h1 {
+  font-size: 26px;
 }
 
 .quiz-container{
@@ -49,7 +67,6 @@ body {
 }
 
 .quiz-nav {
-	background-color: #363946;
 	color: white;
 	min-height: 45px;
 }
