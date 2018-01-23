@@ -1,10 +1,6 @@
 'use strict'
 
-// Todo:
-// 1. Move submit button to right corner of nav bar.
-// 2. Remove restart
-// 3. Fix spacing on result section.
-
+const QUESTIONS = _.shuffle(originalQuestions);
 const incorrectColor = '#EA4335';
 const correctColor = '#34A853';
 const notSelectedColor = '#9AA0A6';

@@ -1,4 +1,4 @@
-const QUESTIONS = [
+const originalQuestions = [
   {
     text: 'According to Greek mythology, who was the god of wine?',
     answers: ['Dionysus','Baccus','Adonis','Venus',],
@@ -23,12 +23,28 @@ const QUESTIONS = [
     text: 'Jimmy Carter was the first U.S. president born in a what?',
     answers: ['Hospital','Barn','Automobile','Drought',],
     correctAnswer: 'Hospital',
-  }
-  ];
+  },
+  {
+    text: 'American mobster Al Capone was sentenced to 11 years in federal prison for what crime?',
+    answers:['Tax Evasion','Murder','Grand Theft Auto','Bank Robbery',],
+    correctAnswer: 'Tax Evasion',
+  },
+  {
+    text: 'The period of European history that lasted from the 14th to the the 17th century is known as what?',
+    answers:['The Renaissance','The Guilded Age','The Victorian Era','The bronze age',],
+    correctAnswer: 'The Renaissance',
+  },
+  {
+    text: 'What Byzantine city was renamed Istanbul after being captured by the Ottoman Empire?',
+    answers:['Constantinople','Jerusalem','Athens','Mosul',],
+    correctAnswer: 'Constantinople',
+  },
+  {
+    text: 'In 1867 the United States purchased Alaska from what country?',
+    answers:['Russia','China','Canada','Spain',],
+    correctAnswer: 'Russia',
+  },
+];
 
 
 
-// ['Tax Evasion','Murder','Grand Theft Auto','Bank Robbery',]
-// ['The Renaissance','The Guilded Age','The Victorian Era','The bronze age',]
-// ['Constantinople','Jerusalem','Athens','Mosul',]
-// ['Russia','China','Canada','Spain',]
