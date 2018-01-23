@@ -12,6 +12,8 @@ const STORE = {
 };
 
 function checkAnswer() {
+  // Evaluate the selected answer against the data store. If the answer is 
+  // correct, increment the counter and return True. Otherwise return false.
   const selected = $('input[name=q1]:checked').val();
   const correct = QUESTIONS[STORE.currentQuestion].correctAnswer;
   const result = (selected === correct);
@@ -20,6 +22,8 @@ function checkAnswer() {
 }
 
 function showCorrect(selectedCorrectly) {
+  // Modify the background color of the answers to indicate green for a correct
+  // answer, red for an incorrect answer, and grey for all other choices.
   if (selectedCorrectly === true) {
     $('input[name=q1]').parent().css('background-color', notSelectedColor);
     $('input[name=q1]:checked').parent().css('background-color', correctColor);
@@ -32,6 +36,8 @@ function showCorrect(selectedCorrectly) {
 }
 
 function generateQuestionTemplate(question) {
+  // Shuffles the answers and generates the HTML for a radio button form
+  // question.
   const shuffledAnswers =  _.shuffle(question.answers);
   const correctList = shuffledAnswers.map(a => a === question.correctAnswer);
   return `
@@ -55,6 +61,8 @@ function generateQuestionTemplate(question) {
 }
 
 function getNavButton() {
+  // Helper function which returns a different button based on the app's current
+  // state. Options are "Next question", "Submit answer" and "Try Again".
   if (STORE.state === 'submitted') {
     return '<button class="js-next-question" type="button">Next Question</button>';
   } else if (STORE.state === 'question') {
@@ -68,6 +76,7 @@ function getNavButton() {
 }
 
 function generateHeaderResultsTemplate() {
+  // Populates the HTML used to display the user's progress in the header bar.
   const qText = `${STORE.currentQuestion + 1} / ${QUESTIONS.length}`;
   const correctText = `Score: ${STORE.correct}`;
   let resultsHtml = `
@@ -82,11 +91,13 @@ function generateHeaderResultsTemplate() {
 
 
 function generateQuizNavTemplate() {
+  // Function to create the HTML used below the form for navigation.
   let navHtml = `<div class="col-12 quiz-nav-item">${getNavButton()}</div>`;
   return navHtml;
 }
 
 function generateResultsTemplate() {
+  // Generates the contents of a results pop out modal.
   return `
   <div class="modal-content">
     <span>Thanks for playing, you got ${STORE.correct} questions right.<br><br>
@@ -96,14 +107,9 @@ function generateResultsTemplate() {
   `;
 }
 
-function renderFinalResults() {
-  STORE.state = 'results';
-  const resultsHtml = generateResultsTemplate();
-  $('.quiz-nav').toggleClass('hidden');
-  $('.question-container').html(resultsHtml);
-}
-
 function renderQuestion() {
+  // When called, sets the current state to question and generates all html
+  // elements necessary to show the next question.
   STORE.state = 'question';
   const question = QUESTIONS[STORE.currentQuestion];
   const questionHtml = generateQuestionTemplate(question);
@@ -115,7 +121,8 @@ function renderQuestion() {
 }
 
 function handleStartButtonClicked() {
-  // Once the user begins the quiz, renders the question section.
+  // Once the user begins the quiz, hides a start button and renders the first 
+  // question.
   $('.js-start-quiz').click(event => {
     $('.quiz-nav').toggleClass('hidden');
     $('.starting-container').toggleClass('hidden');
@@ -124,13 +131,9 @@ function handleStartButtonClicked() {
   });
 }
 
-function handleResetButtonClicked() {
-  $('.quiz-nav').on('click', '.js-reset-quiz', event => {
-    location.reload();
-  });
-}
-
 function showResultsModal() {
+  // Generates the HTML for a modal and displays it to the user. Also kicks off
+  // an event listener to allow the user to close the modal.
   const resultsHtml = generateResultsTemplate();
   const modal = $('.js-results-modal')
   modal.html(resultsHtml)
@@ -139,12 +142,22 @@ function showResultsModal() {
 };
 
 function handleModalInteractions() {
+  // Listens for a close modal event.
   $('.js-results-modal').on('click', '.js-close-modal', event => {
       $('.js-results-modal').toggleClass('hidden')
   })
 }
 
+function handleResetButtonClicked() {
+  // Listens for a click on a reset quiz button.
+  $('.quiz-nav').on('click', '.js-reset-quiz', event => {
+    location.reload();
+  });
+}
+
 function handleQuestionSubmit() {
+  // Handles error checking and determines the appropriate content to display 
+  // based on current app state.
   $('.quiz-nav').on('click', '.js-submit-answer', event => {
     if ($('input').is(':checked') === false) {
       alert('Please select an answer.');
