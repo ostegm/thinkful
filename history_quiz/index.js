@@ -101,7 +101,7 @@ function generateResultsTemplate() {
   return `
   <div class="modal-content">
     <span>Thanks for playing, you got ${STORE.correct} questions right.<br><br>
-    <a href=""">Try again?</a></span>
+    <a href="">Try again?</a></span>
     <span class="js-close-modal">&times;</span>
   </div>
   `;
@@ -184,17 +184,11 @@ function handleNextQuestionClicked() {
     });
 }
 
-function handleViewResultsClicked() {
-  $('.quiz-nav').on('click', '.js-view-results', renderFinalResults);
-}
-
 function renderQuiz() {
   handleStartButtonClicked();
   handleQuestionSubmit();
   handleNextQuestionClicked();
-  handleViewResultsClicked();
   handleResetButtonClicked();
-
 }
 
 $(renderQuiz);

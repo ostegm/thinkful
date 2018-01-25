@@ -222,10 +222,13 @@ label:hover, label:focus {
     padding: 20px;
     width: 40%;
     font-size: 26px;
+    border-radius: 3%;
+    text-align: center;
+
 }
 
 .modal-content a {
-  color: grey;
+  color: #C8C8C8;
   text-decoration: none;
 }
 
